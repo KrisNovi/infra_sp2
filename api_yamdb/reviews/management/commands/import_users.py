@@ -27,7 +27,9 @@ class Command(BaseCommand):
         print("Loading users data")
 
         # Code to load the data into database
-        for row in DictReader(open(os.path.join(settings.BASE_DIR, 'static', 'users.csv'))):
+        for row in DictReader(
+            open(os.path.join(settings.BASE_DIR, 'static', 'users.csv'))
+        ):
             user = User(
                 id=row['id'],
                 username=row['username'],
