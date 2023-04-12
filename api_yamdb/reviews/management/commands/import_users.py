@@ -1,13 +1,13 @@
 ﻿from csv import DictReader
-
-
+from django.conf import settings
+import os.path
 from django.core.management import BaseCommand
 
 from reviews.models import User
 
 
 ALREDY_LOADED_ERROR_MESSAGE = """
-If you need to reload the child data from the CSV file,
+If you need to reload the data from the CSV file,
 first delete the db.sqlite3 file to destroy the database.
 Then, run `python manage.py migrate` for a new empty
 database with tables"""
@@ -27,7 +27,7 @@ class Command(BaseCommand):
         print("Loading users data")
 
         # Code to load the data into database
-        for row in DictReader(open('./var/html/static/data/users.csv')):
+        for row in DictReader(open(os.path.join(settings.BASE_DIR, 'static', 'users.csv'))):
             user = User(
                 id=row['id'],
                 username=row['username'],
